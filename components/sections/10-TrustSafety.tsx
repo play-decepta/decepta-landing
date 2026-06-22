@@ -1,8 +1,15 @@
 'use client'
 import { motion } from 'framer-motion'
-import { Lock, Scale, Zap, Shield, ShieldCheck, AlertTriangle } from 'lucide-react'
+import { Lock, Scale, Zap, Shield, ShieldCheck, AlertTriangle, LucideProps } from 'lucide-react'
 
-const cards = [
+type TrustCardData = {
+  icon: React.ComponentType<LucideProps>
+  title: string
+  desc: string
+  checks: string[]
+}
+
+const cards: TrustCardData[] = [
   {
     icon: Lock,
     title: 'Secure Funds',
@@ -37,7 +44,12 @@ const cards = [
 
 const responsiblePills = ['Stake limits', 'Session reminders', 'Self-exclusion', '24/7 support']
 
-function TrustCard({ card, delay }) {
+interface TrustCardProps {
+  card: TrustCardData
+  delay: number
+}
+
+function TrustCard({ card, delay }: TrustCardProps) {
   const Icon = card.icon
   return (
     <motion.div
