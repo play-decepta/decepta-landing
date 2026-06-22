@@ -11,7 +11,7 @@ const players = [
   { rank: 5, move: 'up', initial: 'L', name: 'LogicFrost', games: 38, winRate: 59, earnings: '$720', weeklyChange: '+$15 this week', streak: 2, hot: false, avatarClass: 'bg-[rgba(0,200,100,0.1)] text-[#00C864] border-[rgba(0,200,100,0.2)]' },
 ]
 
-function MoveIcon({ move }) {
+function MoveIcon({ move}: { move: 'up' | 'down' | null}) {
   if (move === 'up') return <ChevronUp size={13} color="#00C864" strokeWidth={2.5} />
   if (move === 'down') return <ChevronDown size={13} color="#EF4444" strokeWidth={2.5} />
   return <Minus size={13} color="#444" strokeWidth={2.5} />
