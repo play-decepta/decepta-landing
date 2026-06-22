@@ -21,32 +21,6 @@ No backend, no database, no authentication. All data shown on leaderboards, payo
 
 ---
 
-## Getting Started
-
-### Prerequisites
-- Node.js 18+
-- npm
-
-### Install dependencies
-```bash
-npm install
-```
-
-### Run the dev server
-```bash
-npm run dev
-```
-
-Visit [http://localhost:3000](http://localhost:3000).
-
-### Build for production
-```bash
-npm run build
-npm run start
-```
-
----
-
 ## Project Structure
 
 ```
@@ -138,17 +112,6 @@ These are not bugs — they're deliberately deferred until the relevant piece ex
 - **Cookie Policy** states truthfully that no tracking/analytics cookies are currently used. If analytics, ads, or tracking scripts are added later, this page (and likely a consent banner, which does not currently exist) must be updated before those scripts go live.
 - **`metadataBase` in `app/layout.tsx`** is set to `https://decepta.xyz`. Update this immediately if the final domain changes.
 - **`lib/constants.ts`** is currently minimal. Several values (platform fee %, Cipher max stake, round timer length, disconnect timeout) are hardcoded directly inside individual section components rather than centralized. If these numbers change, search across `components/sections/` rather than assuming one central file controls them.
-
----
-
-## Deployment
-
-This project is built for **Vercel** (not GitHub Pages — this is a server-rendered Next.js app, not a static export).
-
-1. Push to GitHub
-2. Import the repo at [vercel.com](https://vercel.com)
-3. Vercel auto-detects Next.js, no config needed
-4. Add the custom domain under **Project Settings → Domains**
 
 ---
 
