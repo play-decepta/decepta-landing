@@ -1,6 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
-import { Swords, Bot } from 'lucide-react'
+import { Swords, Bot, LucideProps } from 'lucide-react'
 
 const recentPayouts = [
   { initial: 'K', name: 'Kxng_Zero', mode: 'Duel', amount: '+$18.00', win: true, time: '2 min ago', avatarClass: 'bg-[rgba(249,115,22,0.15)] text-[#F97316]' },
@@ -14,7 +14,15 @@ const platformStats = [
   { value: 'Instant', label: 'Payout speed', color: 'text-white' },
 ]
 
-const duelFlow = [
+type FlowRow = {
+  label: string
+  value: string
+  style: string
+  op: string | null
+  highlight?: boolean
+}
+
+const duelFlow: FlowRow[] = [
   { label: 'Your stake', value: '$10.00', style: 'text-[#F97316]', op: null },
   { label: 'Opponent stake', value: '$10.00', style: 'text-white', op: '+' },
   { label: 'Total pot', value: '$20.00', style: 'text-white', op: '↓' },
@@ -22,7 +30,7 @@ const duelFlow = [
   { label: 'You win', value: '$18.00', style: 'text-[#00C864]', op: '↓', highlight: true },
 ]
 
-const cipherFlow = [
+const cipherFlow: FlowRow[] = [
   { label: 'Your stake', value: '$10.00', style: 'text-[#F97316]', op: null },
   { label: 'Cipher matches (treasury)', value: '$10.00', style: 'text-white', op: '+' },
   { label: 'Total pot', value: '$20.00', style: 'text-white', op: '↓' },
@@ -30,7 +38,17 @@ const cipherFlow = [
   { label: 'You win', value: '$18.00', style: 'text-[#00C864]', op: '↓', highlight: true },
 ]
 
-function FlowCard({ tagIcon, tag, flow, badgeTitle, badgeSub, badgeAmount, delay }) {
+interface FlowCardProps {
+  tagIcon: React.ComponentType<LucideProps>
+  tag: string
+  flow: FlowRow[]
+  badgeTitle: string
+  badgeSub: string
+  badgeAmount: string
+  delay: number
+}
+
+function FlowCard({ tagIcon, tag, flow, badgeTitle, badgeSub, badgeAmount, delay }: FlowCardProps) {
   const TagIcon = tagIcon
   return (
     <motion.div
