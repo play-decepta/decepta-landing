@@ -2,7 +2,19 @@
 import { motion } from 'framer-motion'
 import { CheckCircle2, Circle } from 'lucide-react'
 
-const phases = [
+type PhaseStatus = 'done' | 'active' | 'soon' | 'future'
+
+type Phase = {
+  phase: string
+  title: string
+  desc: string
+  status: PhaseStatus
+  statusLabel: string
+  items: string[]
+  side: 'left' | 'right'
+}
+
+const phases: Phase[] = [
   {
     phase: 'Phase 1',
     title: 'Foundation',
@@ -50,48 +62,57 @@ const phases = [
   },
 ]
 
-const dotStyles = {
+const dotStyles: Record<PhaseStatus, string> = {
   done: 'bg-[#F97316] shadow-[0_0_12px_rgba(249,115,22,0.5)]',
   active: 'bg-[#F97316] shadow-[0_0_16px_rgba(249,115,22,0.6)] animate-pulse',
   soon: 'bg-[#2A2A2A] border-2 border-[#444]',
   future: 'bg-[#1A1A1A] border-2 border-[#2A2A2A]',
 }
 
-const cardStyles = {
+const cardStyles: Record<PhaseStatus, string> = {
   done: 'border-[rgba(249,115,22,0.2)]',
   active: 'border-[rgba(249,115,22,0.35)] bg-[rgba(249,115,22,0.04)]',
   soon: 'border-[#1E1E1E]',
   future: 'border-[#1E1E1E]',
 }
 
-const phaseColors = {
+const phaseColors: Record<PhaseStatus, string> = {
   done: 'text-[#F97316]',
   active: 'text-[#F97316]',
   soon: 'text-[#555]',
   future: 'text-[#444]',
 }
 
-const statusStyles = {
+const statusStyles: Record<PhaseStatus, string> = {
   done: 'bg-[rgba(0,200,100,0.08)] border border-[rgba(0,200,100,0.2)] text-[#00C864]',
   active: 'bg-[rgba(249,115,22,0.1)] border border-[rgba(249,115,22,0.25)] text-[#F97316]',
   soon: 'bg-[rgba(255,255,255,0.04)] border border-[#2A2A2A] text-[#555]',
   future: 'bg-[rgba(255,255,255,0.02)] border border-[#1E1E1E] text-[#444]',
 }
 
-const liDotStyles = {
+const liDotStyles: Record<PhaseStatus, string> = {
   done: 'bg-[#F97316]',
   active: 'bg-[#F97316]',
   soon: 'bg-[#444]',
   future: 'bg-[#333]',
 }
 
-function StatusIcon({ status }) {
+interface StatusIconProps {
+  status: PhaseStatus
+}
+
+function StatusIcon({ status }: StatusIconProps) {
   if (status === 'done') return <CheckCircle2 size={11} strokeWidth={2.5} />
   if (status === 'active') return <Circle size={9} strokeWidth={0} fill="currentColor" />
   return null
 }
 
-function PhaseCard({ p, delay }) {
+interface PhaseCardProps {
+  p: Phase
+  delay: number
+}
+
+function PhaseCard({ p, delay }: PhaseCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
