@@ -9,9 +9,9 @@ const players = [
   { rank: 3, move: 'up', initial: 'G', name: 'GhostRiddle', games: 49, winRate: 65, earnings: '$980', weeklyChange: '+$22 this week', streak: 3, hot: false, avatarClass: 'bg-[rgba(100,180,255,0.1)] text-[#64B4FF] border-[rgba(100,180,255,0.2)]' },
   { rank: 4, move: 'down', initial: 'P', name: 'PhantomX', games: 61, winRate: 61, earnings: '$840', weeklyChange: '-$8 this week', streak: 0, hot: false, avatarClass: 'bg-[rgba(180,100,255,0.1)] text-[#B464FF] border-[rgba(180,100,255,0.2)]' },
   { rank: 5, move: 'up', initial: 'L', name: 'LogicFrost', games: 38, winRate: 59, earnings: '$720', weeklyChange: '+$15 this week', streak: 2, hot: false, avatarClass: 'bg-[rgba(0,200,100,0.1)] text-[#00C864] border-[rgba(0,200,100,0.2)]' },
-]
+] as const
 
-function MoveIcon({ move}: { move: 'up' | 'down' | null}) {
+function MoveIcon({ move}: { move: 'up' | 'down' | 'same'}) {
   if (move === 'up') return <ChevronUp size={13} color="#00C864" strokeWidth={2.5} />
   if (move === 'down') return <ChevronDown size={13} color="#EF4444" strokeWidth={2.5} />
   return <Minus size={13} color="#444" strokeWidth={2.5} />
