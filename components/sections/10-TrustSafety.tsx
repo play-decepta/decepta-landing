@@ -131,6 +131,8 @@ export default function TrustSafety() {
           ))}
         </div>
       </motion.div>
+
+      <p className="relative z-10 w-full max-w-[1200px] text-center text-[11px] text-[#555] mt-4">Decepta runs on smart contracts that have not yet completed a third-party security audit. Stake only what you understand the risk of.</p>
     </section>
   )
 }
