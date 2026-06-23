@@ -16,10 +16,10 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://decepta.xyz'),
-  title: 'Decepta — Predict. Outplay. Earn.',
+  title: 'Decepta, Predict. Outplay. Earn.',
   description: 'A competitive intelligence platform where pressure reveals skill. Stake real money. Beat real opponents.',
   openGraph: {
-    title: 'Decepta — Predict. Outplay. Earn.',
+    title: 'Decepta, Predict. Outplay. Earn.',
     description: 'A competitive intelligence platform where pressure reveals skill.',
     images: ['/assets/og-image.png'],
   },
