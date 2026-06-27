@@ -16,7 +16,10 @@ export default function SectionHeading({
       {lines.map((line, i) => (
         <span
           key={i}
-          className={i === lines.length - 1 ? 'text-[#F97316]' : 'text-white'}
+          style={i === lines.length - 1
+            ? { color: '#FF7A00', textShadow: '0 0 40px rgba(255,122,0,0.28)' }
+            : { color: '#FFFFFF' }
+          }
         >
           {line}{i < lines.length - 1 ? ' ' : ''}
         </span>

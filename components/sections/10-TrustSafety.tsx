@@ -57,23 +57,40 @@ function TrustCard({ card, delay }: TrustCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay }}
-      className="relative bg-[#111] border border-[#1E1E1E] rounded-[18px] p-7 flex flex-col gap-4 overflow-hidden group hover:border-[rgba(249,115,22,0.25)] hover:-translate-y-0.5 transition-all duration-300 after:content-[''] after:absolute after:top-0 after:left-0 after:right-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-[rgba(249,115,22,0.25)] after:to-transparent after:opacity-0 group-hover:after:opacity-100 after:transition-opacity"
+      className="relative overflow-hidden rounded-[18px] p-7 flex flex-col gap-4"
+      style={{
+        background: 'rgba(255,255,255,0.03)',
+        backdropFilter: 'blur(20px) saturate(1.6) brightness(1.04)',
+        WebkitBackdropFilter: 'blur(20px) saturate(1.6) brightness(1.04)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 32px rgba(0,0,0,0.30)',
+        transition: 'border-color 0.2s, transform 0.2s',
+      }}
+      onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,122,0,0.25)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+      onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; e.currentTarget.style.transform = 'translateY(0)' }}
     >
-      <div className="w-11 h-11 rounded-xl bg-[rgba(249,115,22,0.08)] border border-[rgba(249,115,22,0.15)] flex items-center justify-center">
-        <Icon size={20} color="#F97316" strokeWidth={1.5} />
+      {/* Specular rim — appears on hover via CSS transition on parent */}
+      <div style={{ position: 'absolute', top: 0, left: '12%', right: '12%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)', pointerEvents: 'none' }} />
+
+      {/* Icon container — glass with orange tint */}
+      <div className="relative overflow-hidden w-11 h-11 rounded-xl flex items-center justify-center"
+        style={{ background: 'rgba(255,122,0,0.08)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', border: '1px solid rgba(255,122,0,0.18)', boxShadow: 'inset 0 1px 0 rgba(255,122,0,0.12)' }}>
+        <div style={{ position: 'absolute', top: 0, left: '15%', right: '15%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(255,122,0,0.30), transparent)' }} />
+        <Icon size={20} color="#FF7A00" strokeWidth={1.5} />
       </div>
 
       <p className="text-[14px] font-extrabold text-white uppercase tracking-wide">{card.title}</p>
-
-      <p className="text-[12px] text-[#666] leading-relaxed">{card.desc}</p>
+      <p className="text-[12px] leading-relaxed" style={{ color: '#666666' }}>{card.desc}</p>
 
       <div className="flex flex-col gap-2.5 mt-1">
-        {card.checks.map((check) => (
+        {card.checks.map(check => (
           <div key={check} className="flex items-start gap-2">
-            <div className="w-4 h-4 rounded-full bg-[rgba(0,200,100,0.1)] border border-[rgba(0,200,100,0.25)] flex items-center justify-center flex-shrink-0 mt-0.5">
-              <span className="text-[9px] text-[#00C864] font-bold">✓</span>
+            {/* Check circle — green glass */}
+            <div className="relative overflow-hidden w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+              style={{ background: 'rgba(72,199,116,0.10)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', border: '1px solid rgba(72,199,116,0.25)' }}>
+              <span style={{ fontSize: '9px', color: '#48C774', fontWeight: 700 }}>✓</span>
             </div>
-            <span className="text-[12px] text-[#888] leading-relaxed">{check}</span>
+            <span className="text-[12px] leading-relaxed" style={{ color: '#888888' }}>{check}</span>
           </div>
         ))}
       </div>
@@ -83,18 +100,22 @@ function TrustCard({ card, delay }: TrustCardProps) {
 
 export default function TrustSafety() {
   return (
-    <section id="trust" className="relative w-full px-5 py-28 flex flex-col items-center bg-[#0A0A0A] overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(249,115,22,0.05)_0%,transparent_70%)] pointer-events-none" />
+    <section id="trust" className="relative w-full px-5 py-28 flex flex-col items-center overflow-hidden" style={{ backgroundColor: '#090909' }}>
 
-      <p className="relative z-10 text-[11px] font-bold tracking-[0.18em] uppercase text-[#F97316] mb-4">Trust & Safety</p>
+      {/* Orbs — kept subtle so text stays readable */}
+      <div style={{ position: 'absolute', width: '600px', height: '400px', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', background: 'radial-gradient(ellipse at center, rgba(255,122,0,0.08) 0%, transparent 70%)', filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
+      <div style={{ position: 'absolute', width: '300px', height: '300px', top: '10%', left: '5%', background: 'radial-gradient(circle, rgba(72,199,116,0.06) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none', zIndex: 0 }} />
+      <div style={{ position: 'absolute', width: '300px', height: '300px', bottom: '10%', right: '5%', background: 'radial-gradient(circle, rgba(72,199,116,0.06) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none', zIndex: 0 }} />
+
+      <p className="relative z-10 text-[11px] font-bold tracking-[0.18em] uppercase mb-4" style={{ color: '#FF7A00' }}>Trust & Safety</p>
 
       <h2 className="relative z-10 text-[clamp(32px,5vw,52px)] font-black uppercase leading-[1.05] tracking-tight text-center mb-4">
         <span className="text-white">Built to be </span>
-        <span className="text-[#F97316]">trusted.</span>
+        <span style={{ color: '#FF7A00', textShadow: '0 0 40px rgba(255,122,0,0.25)' }}>trusted.</span>
       </h2>
 
-      <p className="relative z-10 text-[15px] text-[#666] text-center max-w-[440px] leading-relaxed mb-16">
-        Real money deserves real transparency. Here's exactly how Decepta protects your funds, your matches, and your experience.
+      <p className="relative z-10 text-[15px] text-center max-w-[440px] leading-relaxed mb-16" style={{ color: '#555555' }}>
+        Real money deserves real transparency. Here&apos;s exactly how Decepta protects your funds, your matches, and your experience.
       </p>
 
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full max-w-[1200px] mb-3.5">
@@ -109,30 +130,44 @@ export default function TrustSafety() {
         ))}
       </div>
 
+      {/* Responsible gaming banner */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className="relative z-10 w-full max-w-[1200px] mt-3.5 bg-[rgba(249,115,22,0.04)] border border-[rgba(249,115,22,0.15)] rounded-[18px] p-7 flex items-center gap-8 flex-wrap"
+        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
+        className="relative z-10 w-full max-w-[1200px] mt-3.5 overflow-hidden rounded-[18px] p-7 flex items-center gap-8 flex-wrap"
+        style={{
+          background: 'rgba(255,122,0,0.05)',
+          backdropFilter: 'blur(24px) saturate(1.8) brightness(1.05)',
+          WebkitBackdropFilter: 'blur(24px) saturate(1.8) brightness(1.05)',
+          border: '1px solid rgba(255,122,0,0.18)',
+          boxShadow: 'inset 0 1px 0 rgba(255,122,0,0.12), 0 0 40px rgba(255,122,0,0.05)',
+        }}
       >
+        <div style={{ position: 'absolute', top: 0, left: '10%', right: '10%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(255,122,0,0.30), transparent)', pointerEvents: 'none' }} />
+
         <div className="flex-1 min-w-[200px] flex items-start gap-3">
-          <AlertTriangle size={20} color="#F97316" strokeWidth={1.5} className="flex-shrink-0 mt-0.5" />
+          <AlertTriangle size={20} color="#FF7A00" strokeWidth={1.5} className="flex-shrink-0 mt-0.5" />
           <div>
             <p className="text-[14px] font-extrabold text-white uppercase tracking-wide mb-1.5">Responsible Gaming</p>
-            <p className="text-[12px] text-[#666] leading-relaxed">
+            <p className="text-[12px] leading-relaxed" style={{ color: '#666666' }}>
               Decepta is a skill-based competitive platform. Only stake what you can afford to lose. We provide tools to help you stay in control of your play.
             </p>
           </div>
         </div>
+
         <div className="flex gap-2 flex-wrap">
-          {responsiblePills.map((pill) => (
-            <span key={pill} className="bg-[rgba(249,115,22,0.08)] border border-[rgba(249,115,22,0.15)] rounded-lg px-3.5 py-1.5 text-[11px] font-bold text-[#F97316] tracking-wide uppercase whitespace-nowrap">{pill}</span>
+          {responsiblePills.map(pill => (
+            <span key={pill} className="relative overflow-hidden rounded-lg px-3.5 py-1.5 text-[11px] font-bold tracking-wide uppercase whitespace-nowrap"
+              style={{ background: 'rgba(255,122,0,0.08)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', border: '1px solid rgba(255,122,0,0.18)', color: '#FF7A00' }}>
+              {pill}
+            </span>
           ))}
         </div>
       </motion.div>
 
-      <p className="relative z-10 w-full max-w-[1200px] text-center text-[11px] text-[#555] mt-4">Decepta runs on smart contracts that have not yet completed a third-party security audit. Stake only what you understand the risk of.</p>
+      <p className="relative z-10 w-full max-w-[1200px] text-center text-[11px] mt-4" style={{ color: '#444444' }}>
+        Decepta runs on smart contracts that have not yet completed a third-party security audit. Stake only what you understand the risk of.
+      </p>
     </section>
   )
 }

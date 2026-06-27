@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { useState } from 'react'
 import useCountdown from '@/hooks/useCountdown'
 
+const GOLD = '#F5C451'
+
 function getNextFriday() {
   const now = new Date()
   const next = new Date()
@@ -24,107 +26,162 @@ export default function FridaySpotlight() {
 
   const units = [
     { value: time.d, label: 'Days' },
-    { value: time.h, label: 'Hrs' },
-    { value: time.m, label: 'Min' },
-    { value: time.s, label: 'Sec' },
+    { value: time.h, label: 'Hrs'  },
+    { value: time.m, label: 'Min'  },
+    { value: time.s, label: 'Sec'  },
   ]
 
   return (
-    <section id="friday" className="relative w-full px-5 py-28 flex flex-col items-center bg-[#0A0A0A] overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(234,179,8,0.07)_0%,transparent_70%)] pointer-events-none" />
+    <section id="friday" className="relative w-full px-5 py-28 flex flex-col items-center overflow-hidden" style={{ backgroundColor: '#090909' }}>
 
-      <p className="relative z-10 text-[11px] font-bold tracking-[0.18em] uppercase text-[#EAB308] mb-4">Friday Event</p>
+      {/* Gold orbs — give the glass surfaces rich colour to blur */}
+      <div style={{ position: 'absolute', width: '700px', height: '500px', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', background: 'radial-gradient(ellipse at center, rgba(245,196,81,0.14) 0%, transparent 70%)', filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
+      <div style={{ position: 'absolute', width: '400px', height: '400px', top: '10%', left: '-80px', background: 'radial-gradient(circle, rgba(245,196,81,0.08) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none', zIndex: 0 }} />
+      <div style={{ position: 'absolute', width: '400px', height: '400px', bottom: '10%', right: '-80px', background: 'radial-gradient(circle, rgba(245,196,81,0.08) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none', zIndex: 0 }} />
+
+      <p className="relative z-10 text-[11px] font-bold tracking-[0.18em] uppercase mb-4" style={{ color: GOLD }}>Friday Event</p>
 
       <h2 className="relative z-10 text-[clamp(32px,5vw,52px)] font-black uppercase leading-[1.05] tracking-tight text-center mb-4">
         <span className="text-white">The arena goes </span>
-        <span className="text-[#EAB308]">live every Friday.</span>
+        <span style={{ color: GOLD, textShadow: '0 0 40px rgba(245,196,81,0.30)' }}>live every Friday.</span>
       </h2>
 
-      <p className="relative z-10 text-[15px] text-[#666] text-center max-w-[440px] leading-relaxed mb-16">
+      <p className="relative z-10 text-[15px] text-center max-w-[440px] leading-relaxed mb-16" style={{ color: '#555555' }}>
         Community-selected contestants battle live. You predict the winner. The pot pays out. Predictions close Thursday.
       </p>
 
-      <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="relative z-10 w-full max-w-[860px] bg-[#111] border border-[rgba(234,179,8,0.25)] rounded-2xl overflow-hidden">
-        <div className="flex items-center justify-between flex-wrap gap-2 px-8 py-4 bg-[rgba(234,179,8,0.08)] border-b border-[rgba(234,179,8,0.15)]">
-          <div className="inline-flex items-center gap-2 bg-[rgba(234,179,8,0.15)] border border-[rgba(234,179,8,0.3)] rounded-full px-4 py-1.5">
-            <span className="w-[6px] h-[6px] rounded-full bg-[#EAB308] animate-pulse" />
-            <span className="text-[11px] font-bold text-[#EAB308] tracking-[0.12em] uppercase">This Week's Match</span>
+      {/* Main event card */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }} transition={{ duration: 0.6 }}
+        className="relative z-10 w-full max-w-[860px] overflow-hidden rounded-2xl"
+        style={{
+          background: 'rgba(245,196,81,0.05)',
+          backdropFilter: 'blur(32px) saturate(1.8) brightness(1.06)',
+          WebkitBackdropFilter: 'blur(32px) saturate(1.8) brightness(1.06)',
+          border: '1px solid rgba(245,196,81,0.22)',
+          boxShadow: 'inset 0 1px 0 rgba(245,196,81,0.16), inset 0 -1px 0 rgba(0,0,0,0.25), 0 0 60px rgba(245,196,81,0.08), 0 24px 64px rgba(0,0,0,0.50)',
+        }}
+      >
+        {/* Top specular rim */}
+        <div style={{ position: 'absolute', top: 0, left: '10%', right: '10%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(245,196,81,0.45), transparent)', pointerEvents: 'none', zIndex: 10 }} />
+
+        {/* Header bar */}
+        <div className="flex items-center justify-between flex-wrap gap-2 px-8 py-4"
+          style={{ background: 'rgba(245,196,81,0.07)', borderBottom: '1px solid rgba(245,196,81,0.12)' }}>
+          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5"
+            style={{ background: 'rgba(245,196,81,0.12)', border: '1px solid rgba(245,196,81,0.28)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)' }}>
+            <span className="w-[6px] h-[6px] rounded-full" style={{ backgroundColor: GOLD, animation: 'pulse 2s ease-in-out infinite', boxShadow: '0 0 8px rgba(245,196,81,0.6)' }} />
+            <span className="text-[11px] font-bold tracking-[0.12em] uppercase" style={{ color: GOLD }}>This Week&apos;s Match</span>
           </div>
-          <span className="text-[12px] font-semibold text-[#666] tracking-wide uppercase">Closes Thursday · Prize pool: $400</span>
+          <span className="text-[12px] font-semibold tracking-wide uppercase" style={{ color: '#555555' }}>Closes Thursday · Prize pool: $400</span>
         </div>
 
+        {/* VS section — desktop */}
         <div className="hidden sm:grid grid-cols-[1fr_auto_1fr] gap-8 px-8 py-10 items-center">
-          <div className="flex flex-col items-center gap-3 text-center">
-            <div
-              className="w-[72px] h-[72px] rounded-full bg-[rgba(234,179,8,0.18)] border-2 border-[#EAB308] flex items-center justify-center text-[26px] font-black text-[#EAB308]"
-              style={{ boxShadow: '0 0 30px rgba(234,179,8,0.4)' }}
-            >
-              K
-            </div>
-            <p className="text-[16px] font-extrabold text-white uppercase tracking-wide">Kxng_Zero</p>
-            <p className="text-[11px] font-semibold text-[#555] uppercase tracking-widest">Rank #142</p>
-          </div>
-
-          <div className="flex flex-col items-center gap-2">
-            <div className="w-px h-10 bg-gradient-to-b from-transparent via-[#2A2A2A] to-transparent" />
-            <p className="text-[28px] font-black text-[#2A2A2A] tracking-widest">VS</p>
-            <div className="w-px h-10 bg-gradient-to-b from-transparent via-[#2A2A2A] to-transparent" />
-          </div>
-
-          <div className="flex flex-col items-center gap-3 text-center">
-            <div
-              className="w-[72px] h-[72px] rounded-full bg-[rgba(234,179,8,0.18)] border-2 border-[#EAB308] flex items-center justify-center text-[26px] font-black text-[#EAB308]"
-              style={{ boxShadow: '0 0 30px rgba(234,179,8,0.4)' }}
-            >
-              S
-            </div>
-            <p className="text-[16px] font-extrabold text-white uppercase tracking-wide">ShadowPlayer99</p>
-            <p className="text-[11px] font-semibold text-[#555] uppercase tracking-widest">Rank #88</p>
+          {[{ initial: 'K', name: 'Kxng_Zero', rank: '#142' }, { initial: 'S', name: 'ShadowPlayer99', rank: '#88' }].map((player, i) => (
+            i === 0 ? (
+              <div key={player.name} className="flex flex-col items-center gap-3 text-center">
+                <div className="relative overflow-hidden w-[72px] h-[72px] rounded-full flex items-center justify-center text-[26px] font-black"
+                  style={{ background: 'rgba(245,196,81,0.12)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', border: `2px solid ${GOLD}`, color: GOLD, boxShadow: `0 0 30px rgba(245,196,81,0.35)` }}>
+                  <div style={{ position: 'absolute', top: 0, left: '20%', right: '20%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.30), transparent)' }} />
+                  {player.initial}
+                </div>
+                <p className="text-[16px] font-extrabold text-white uppercase tracking-wide">{player.name}</p>
+                <p className="text-[11px] font-semibold tracking-widest uppercase" style={{ color: '#555555' }}>Rank {player.rank}</p>
+              </div>
+            ) : (
+              <div key={player.name} className="flex flex-col items-center gap-3 text-center" style={{ gridColumn: 3 }}>
+                <div className="relative overflow-hidden w-[72px] h-[72px] rounded-full flex items-center justify-center text-[26px] font-black"
+                  style={{ background: 'rgba(245,196,81,0.12)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', border: `2px solid ${GOLD}`, color: GOLD, boxShadow: `0 0 30px rgba(245,196,81,0.35)` }}>
+                  <div style={{ position: 'absolute', top: 0, left: '20%', right: '20%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.30), transparent)' }} />
+                  {player.initial}
+                </div>
+                <p className="text-[16px] font-extrabold text-white uppercase tracking-wide">{player.name}</p>
+                <p className="text-[11px] font-semibold tracking-widest uppercase" style={{ color: '#555555' }}>Rank {player.rank}</p>
+              </div>
+            )
+          ))}
+          {/* VS divider */}
+          <div className="flex flex-col items-center gap-2" style={{ gridColumn: 2 }}>
+            <div className="w-px h-10" style={{ background: 'linear-gradient(180deg, transparent, rgba(245,196,81,0.20), transparent)' }} />
+            <p className="text-[28px] font-black tracking-widest" style={{ color: 'rgba(245,196,81,0.25)' }}>VS</p>
+            <div className="w-px h-10" style={{ background: 'linear-gradient(180deg, transparent, rgba(245,196,81,0.20), transparent)' }} />
           </div>
         </div>
 
+        {/* VS section — mobile */}
         <div className="flex sm:hidden items-center justify-center gap-6 px-5 py-8">
-          <div className="flex flex-col items-center gap-2 text-center">
-            <div className="w-14 h-14 rounded-full bg-[rgba(234,179,8,0.18)] border-2 border-[#EAB308] flex items-center justify-center text-[20px] font-black text-[#EAB308]" style={{ boxShadow: '0 0 24px rgba(234,179,8,0.4)' }}>K</div>
-            <p className="text-[13px] font-extrabold text-white uppercase">Kxng_Zero</p>
-          </div>
-          <p className="text-[22px] font-black text-[#333]">VS</p>
-          <div className="flex flex-col items-center gap-2 text-center">
-            <div className="w-14 h-14 rounded-full bg-[rgba(234,179,8,0.18)] border-2 border-[#EAB308] flex items-center justify-center text-[20px] font-black text-[#EAB308]" style={{ boxShadow: '0 0 24px rgba(234,179,8,0.4)' }}>S</div>
-            <p className="text-[13px] font-extrabold text-white uppercase">ShadowPlayer99</p>
-          </div>
+          {[{ initial: 'K', name: 'Kxng_Zero' }, { initial: 'S', name: 'ShadowPlayer99' }].map((player, i) => (
+            i === 0 ? (
+              <div key={player.name} className="flex flex-col items-center gap-2 text-center">
+                <div className="relative overflow-hidden w-14 h-14 rounded-full flex items-center justify-center text-[20px] font-black"
+                  style={{ background: 'rgba(245,196,81,0.12)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', border: `2px solid ${GOLD}`, color: GOLD, boxShadow: '0 0 24px rgba(245,196,81,0.35)' }}>
+                  <div style={{ position: 'absolute', top: 0, left: '20%', right: '20%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent)' }} />
+                  {player.initial}
+                </div>
+                <p className="text-[13px] font-extrabold text-white uppercase">{player.name}</p>
+              </div>
+            ) : (
+              <div key={player.name} className="flex flex-col items-center gap-2 text-center">
+                <div className="relative overflow-hidden w-14 h-14 rounded-full flex items-center justify-center text-[20px] font-black"
+                  style={{ background: 'rgba(245,196,81,0.12)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', border: `2px solid ${GOLD}`, color: GOLD, boxShadow: '0 0 24px rgba(245,196,81,0.35)' }}>
+                  <div style={{ position: 'absolute', top: 0, left: '20%', right: '20%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent)' }} />
+                  {player.initial}
+                </div>
+                <p className="text-[13px] font-extrabold text-white uppercase">{player.name}</p>
+              </div>
+            )
+          ))}
+          <p className="text-[22px] font-black" style={{ color: 'rgba(245,196,81,0.25)' }}>VS</p>
         </div>
 
-        <div className="border-t border-[#1E1E1E] px-8 py-6 flex flex-col items-center gap-3">
-          <p className="text-[11px] font-semibold text-[#555] tracking-[0.12em] uppercase">Predictions close in</p>
+        {/* Countdown */}
+        <div className="px-8 py-6 flex flex-col items-center gap-3" style={{ borderTop: '1px solid rgba(245,196,81,0.10)' }}>
+          <p className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: '#555555' }}>Predictions close in</p>
           <div className="flex items-center gap-3">
             {units.map((u, i) => (
               <div key={u.label} className="flex items-center gap-3">
                 <div className="flex flex-col items-center gap-1.5">
-                  <div className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg px-4 py-2.5 text-[26px] sm:text-[28px] font-extrabold text-white min-w-[56px] text-center tabular-nums">{u.value}</div>
-                  <p className="text-[10px] font-semibold text-[#444] tracking-[0.1em] uppercase">{u.label}</p>
+                  <div className="relative overflow-hidden rounded-xl px-4 py-2.5 min-w-[56px] text-center"
+                    style={{ background: 'rgba(245,196,81,0.08)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', border: '1px solid rgba(245,196,81,0.18)', boxShadow: 'inset 0 1px 0 rgba(245,196,81,0.12)' }}>
+                    <div style={{ position: 'absolute', top: 0, left: '20%', right: '20%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(245,196,81,0.35), transparent)' }} />
+                    <span className="text-[26px] sm:text-[28px] font-extrabold text-white tabular-nums" suppressHydrationWarning>{u.value}</span>
+                  </div>
+                  <p className="text-[10px] font-semibold tracking-[0.1em] uppercase" style={{ color: '#444444' }}>{u.label}</p>
                 </div>
-                {i < units.length - 1 && <span className="text-[22px] font-extrabold text-[#2A2A2A] mb-4">:</span>}
+                {i < units.length - 1 && <span className="text-[22px] font-extrabold mb-4" style={{ color: 'rgba(245,196,81,0.25)' }}>:</span>}
               </div>
             ))}
           </div>
         </div>
 
-        <div className="border-t border-[#1E1E1E] px-8 py-5 flex items-center justify-between flex-wrap gap-4">
+        {/* Footer — pool + CTA */}
+        <div className="px-8 py-5 flex items-center justify-between flex-wrap gap-4" style={{ borderTop: '1px solid rgba(245,196,81,0.10)' }}>
           <div>
-            <p className="text-[11px] font-semibold text-[#555] tracking-[0.1em] uppercase mb-1">Current pool</p>
-            <p className="text-[22px] font-black text-[#EAB308]">$400</p>
+            <p className="text-[11px] font-semibold tracking-[0.1em] uppercase mb-1" style={{ color: '#555555' }}>Current pool</p>
+            <p className="text-[22px] font-black" style={{ color: GOLD, textShadow: '0 0 20px rgba(245,196,81,0.30)' }}>$400</p>
           </div>
-          <Link href="/signup" className="px-8 py-3 bg-[#EAB308] hover:opacity-90 text-black text-[14px] font-bold uppercase tracking-wide rounded-lg transition-all hover:-translate-y-px">Predict Now</Link>
+          <Link href="/signup"
+            className="relative overflow-hidden px-8 py-3 rounded-xl text-[14px] font-bold uppercase tracking-wide transition-all hover:-translate-y-px"
+            style={{ background: 'rgba(245,196,81,0.92)', color: '#090909', boxShadow: '0 0 28px rgba(245,196,81,0.30), inset 0 1px 0 rgba(255,255,255,0.30)' }}>
+            <span style={{ position: 'absolute', top: 0, left: '10%', right: '10%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent)' }} />
+            Predict Now
+          </Link>
         </div>
       </motion.div>
 
+      {/* Step cards */}
       <div className="relative z-10 w-full max-w-[860px] mt-12 grid grid-cols-1 sm:grid-cols-3 gap-3">
         {steps.map((step, i) => (
-          <motion.div key={step.num} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.1 }} className="bg-[#111] border border-[rgba(234,179,8,0.15)] rounded-xl px-6 py-5">
-            <p className="text-[11px] font-bold text-[#EAB308] tracking-[0.1em] uppercase mb-1">{step.num}</p>
+          <motion.div key={step.num} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.1 }}
+            className="relative overflow-hidden rounded-xl px-6 py-5"
+            style={{ background: 'rgba(245,196,81,0.04)', backdropFilter: 'blur(20px) saturate(1.8) brightness(1.05)', WebkitBackdropFilter: 'blur(20px) saturate(1.8) brightness(1.05)', border: '1px solid rgba(245,196,81,0.14)', boxShadow: 'inset 0 1px 0 rgba(245,196,81,0.10)' }}>
+            <div style={{ position: 'absolute', top: 0, left: '15%', right: '15%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(245,196,81,0.25), transparent)', pointerEvents: 'none' }} />
+            <p className="text-[11px] font-bold tracking-[0.1em] uppercase mb-1" style={{ color: GOLD }}>{step.num}</p>
             <p className="text-[13px] font-bold text-white uppercase tracking-wide mb-1.5">{step.title}</p>
-            <p className="text-[12px] text-[#666] leading-relaxed">{step.desc}</p>
+            <p className="text-[12px] leading-relaxed" style={{ color: '#555555' }}>{step.desc}</p>
           </motion.div>
         ))}
       </div>

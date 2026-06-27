@@ -1,48 +1,129 @@
+'use client'
 import Navbar from '@/components/sections/02-Navbar'
 import Footer from '@/components/sections/18-Footer'
 import Link from 'next/link'
 
 export default function SignupPage() {
   return (
-    <main className="bg-[#0A0A0A] min-h-screen text-white flex flex-col">
-      <Navbar />
+    <main className="relative min-h-screen flex flex-col overflow-hidden" style={{ backgroundColor: '#090909', color: '#FFFFFF' }}>
 
-      <section className="flex-1 w-full px-5 flex flex-col items-center justify-center text-center py-24">
-        <div className="relative w-full max-w-[600px] flex flex-col items-center">
+      {/* Ambient orbs */}
+      <div className="orb orb-orange" style={{ width: '600px', height: '600px', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', opacity: 0.7 }} />
+      <div className="orb orb-dim" style={{ width: '400px', height: '400px', top: '-100px', right: '-100px' }} />
+      <div className="orb orb-gold" style={{ width: '300px', height: '300px', bottom: '-80px', left: '-80px', opacity: 0.4 }} />
 
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(249,115,22,0.1)_0%,transparent_70%)] pointer-events-none" />
+      <div className="relative z-10 flex flex-col min-h-screen">
+        <Navbar />
 
-          <span className="inline-flex items-center gap-2 bg-[rgba(249,115,22,0.12)] border border-[rgba(249,115,22,0.3)] rounded-full px-4 py-1.5 mb-8 relative z-10">
-            <span className="w-[6px] h-[6px] rounded-full bg-[#F97316] animate-pulse" />
-            <span className="text-[11px] font-bold text-[#F97316] tracking-[0.14em] uppercase">Building in progress</span>
-          </span>
+        <section className="flex-1 w-full px-5 flex flex-col items-center justify-center text-center py-24">
+          <div className="relative w-full max-w-[600px] flex flex-col items-center">
 
-          <h1 className="relative z-10 text-[clamp(40px,8vw,72px)] font-black uppercase leading-[1.0] tracking-tight mb-5">
-            <span className="text-white">Coming</span><br />
-            <span className="text-[#F97316]">soon.</span>
-          </h1>
+            {/* Badge */}
+            <span
+              className="glass-rim inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-8"
+              style={{
+                background: 'rgba(255,122,0,0.10)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                border: '1px solid rgba(255,122,0,0.28)',
+                boxShadow: 'inset 0 1px 0 rgba(255,122,0,0.18), 0 0 20px rgba(255,122,0,0.08)',
+                position: 'relative',
+                overflow: 'hidden',
+              }}
+            >
+              <span className="w-[6px] h-[6px] rounded-full" style={{ backgroundColor: '#FF7A00', animation: 'pulse 2s ease-in-out infinite' }} />
+              <span style={{ fontSize: '11px', fontWeight: 700, color: '#FF7A00', letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+                Building in progress
+              </span>
+            </span>
 
-          <p className="relative z-10 text-[15px] text-[#666] max-w-[420px] leading-relaxed mb-10">
-            The arena isn't open yet, but it's close. Follow along and you'll be the first to know the moment it goes live.
-          </p>
+            {/* Headline */}
+            <h1 style={{ fontSize: 'clamp(40px, 8vw, 72px)', fontWeight: 900, textTransform: 'uppercase', lineHeight: 1.0, letterSpacing: '-0.02em', marginBottom: '20px' }}>
+              <span style={{ color: '#FFFFFF' }}>Coming</span><br />
+              <span style={{ color: '#FF7A00', textShadow: '0 0 40px rgba(255,122,0,0.35)' }}>soon.</span>
+            </h1>
 
-          <div className="relative z-10 flex flex-col sm:flex-row items-center gap-3">
-            <a href="https://t.me/playdecepta" target="_blank" rel="noopener noreferrer" className="px-7 py-3.5 bg-[#F97316] hover:opacity-90 text-black text-[14px] font-bold uppercase tracking-wide rounded-lg transition-all hover:-translate-y-px">
-              Join the Telegram
-            </a>
-            <a href="https://x.com/Play_Decepta" target="_blank" rel="noopener noreferrer" className="px-7 py-3.5 bg-transparent border border-[#2A2A2A] hover:border-[#666] text-[#CCC] text-[14px] font-medium uppercase tracking-wide rounded-lg transition-all">
-              Follow on X
-            </a>
+            <p style={{ fontSize: '15px', color: '#555555', maxWidth: '420px', lineHeight: 1.7, marginBottom: '40px' }}>
+              The arena isn&apos;t open yet, but it&apos;s close. Follow along and you&apos;ll be the first to know the moment it goes live.
+            </p>
+
+            {/* CTAs */}
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '12px', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '40px' }}>
+              <a
+                href="https://t.me/playdecepta"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-rim"
+                style={{
+                  display: 'inline-flex', alignItems: 'center',
+                  padding: '14px 28px',
+                  background: 'rgba(255,122,0,0.92)',
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(255,122,0,0.50)',
+                  borderRadius: '10px',
+                  color: '#090909',
+                  fontSize: '14px',
+                  fontWeight: 800,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.06em',
+                  textDecoration: 'none',
+                  boxShadow: '0 0 28px rgba(255,122,0,0.30), inset 0 1px 0 rgba(255,255,255,0.25)',
+                  transition: 'all 0.2s ease',
+                  position: 'relative',
+                  overflow: 'hidden',
+                }}
+                onMouseEnter={e => (e.currentTarget.style.transform = 'translateY(-2px)')}
+                onMouseLeave={e => (e.currentTarget.style.transform = 'translateY(0)')}
+              >
+                Join the Telegram
+              </a>
+
+              <a
+                href="https://x.com/Play_Decepta"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-rim"
+                style={{
+                  display: 'inline-flex', alignItems: 'center',
+                  padding: '14px 28px',
+                  background: 'rgba(255,255,255,0.04)',
+                  backdropFilter: 'blur(16px)',
+                  WebkitBackdropFilter: 'blur(16px)',
+                  border: '1px solid rgba(255,255,255,0.10)',
+                  borderRadius: '10px',
+                  color: '#CCCCCC',
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.06em',
+                  textDecoration: 'none',
+                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08)',
+                  transition: 'all 0.2s ease',
+                  position: 'relative',
+                  overflow: 'hidden',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.22)'; e.currentTarget.style.color = '#FFFFFF' }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.10)'; e.currentTarget.style.color = '#CCCCCC' }}
+              >
+                Follow on X
+              </a>
+            </div>
+
+            <Link
+              href="/"
+              style={{ fontSize: '12px', color: '#444444', textDecoration: 'none', transition: 'color 0.15s' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#888888')}
+              onMouseLeave={e => (e.currentTarget.style.color = '#444444')}
+            >
+              ← Back to home
+            </Link>
+
           </div>
+        </section>
 
-          <Link href="/" className="relative z-10 text-[12px] text-[#555] hover:text-[#888] mt-10 transition-colors">
-            ← Back to home
-          </Link>
-
-        </div>
-      </section>
-
-      <Footer />
+        <Footer />
+      </div>
     </main>
   )
 }

@@ -1,4 +1,3 @@
-// components/sections/12-FAQ.tsx
 'use client'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -9,12 +8,12 @@ const faqs = [
   {
     cat: 'gameplay' as Category,
     q: 'How does staking work?',
-    a: 'Before a Duel match begins, both players agree on a stake amount. Both players must enter the same amount for the match to start. The winner takes the combined pot minus a 10% platform fee. For Cipher mode, you stake against the platform treasury which matches your amount up to a maximum of $15.',
+    a: 'Before a Duel match begins, both players agree on a stake amount. Both players must enter the same amount for the match to start. The winner takes the combined pot minus a 1% platform fee. For Cipher mode, you stake against the platform treasury which matches your amount up to a maximum of $15.',
   },
   {
     cat: 'gameplay' as Category,
     q: 'What happens if my opponent disconnects mid-match?',
-    a: 'If your opponent disconnects during a live match, the system detects it automatically within 10 seconds. Your stake is returned to your wallet immediately and the match is voided. You will not lose money due to someone else\'s connection issues.',
+    a: "If your opponent disconnects during a live match, the system detects it automatically within 10 seconds. Your stake is returned to your wallet immediately and the match is voided. You will not lose money due to someone else's connection issues.",
   },
   {
     cat: 'gameplay' as Category,
@@ -34,12 +33,12 @@ const faqs = [
   {
     cat: 'money' as Category,
     q: 'What fees does Decepta charge?',
-    a: 'Decepta charges a 10% platform fee on the total pot of each match. This is the only fee. There are no deposit fees, no withdrawal fees, and no hidden charges. For example: if both players stake $10, the total pot is $20, the platform takes $2, and the winner receives $18.',
+    a: 'Decepta charges a 1% platform fee on the total pot of each match. This is the only fee. There are no deposit fees, no withdrawal fees, and no hidden charges. For example: if both players stake $10, the total pot is $20, the platform takes $0.20, and the winner receives $19.80.',
   },
   {
     cat: 'money' as Category,
     q: 'How does the Friday Event prediction pool work?',
-    a: 'Every Friday, community-selected contestants compete live. Before Thursday ends, you stake on which contestant you believe will win. Once your prediction is locked it cannot be changed. After the live match concludes, all correct predictions share the total prediction pool proportionally. The platform takes a percentage fee and contestants also receive an allocation.',
+    a: 'Every Friday, community-selected contestants compete live. Before Thursday ends, you stake on which contestant you believe will win. Once your prediction is locked it cannot be changed. After the live match concludes, all correct predictions share the total prediction pool proportionally. The platform takes a 1% fee and contestants also receive an allocation.',
   },
   {
     cat: 'account' as Category,
@@ -59,10 +58,10 @@ const faqs = [
 ]
 
 const tabs: { label: string; value: Category }[] = [
-  { label: 'All',      value: 'all' },
+  { label: 'All',      value: 'all'      },
   { label: 'Gameplay', value: 'gameplay' },
-  { label: 'Money',    value: 'money' },
-  { label: 'Account',  value: 'account' },
+  { label: 'Money',    value: 'money'    },
+  { label: 'Account',  value: 'account'  },
 ]
 
 export default function FAQ() {
@@ -70,76 +69,86 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   const filtered = faqs.filter(f => activeTab === 'all' || f.cat === activeTab)
-
   const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i)
 
   return (
-    <section
-      id="faq"
-      className="relative w-full px-5 py-28 flex flex-col items-center bg-[#0A0A0A] overflow-hidden"
-    >
-      {/* Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(249,115,22,0.05)_0%,transparent_70%)] pointer-events-none" />
+    <section id="faq" className="relative w-full px-5 py-28 flex flex-col items-center overflow-hidden" style={{ backgroundColor: '#090909' }}>
 
-      {/* Eyebrow */}
-      <p className="relative z-10 text-[11px] font-bold tracking-[0.18em] uppercase text-[#F97316] mb-4">
-        FAQ
-      </p>
+      {/* Orbs */}
+      <div style={{ position: 'absolute', width: '600px', height: '400px', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', background: 'radial-gradient(ellipse at center, rgba(255,122,0,0.09) 0%, transparent 70%)', filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
 
-      {/* Heading */}
+      <p className="relative z-10 text-[11px] font-bold tracking-[0.18em] uppercase mb-4" style={{ color: '#FF7A00' }}>FAQ</p>
+
       <h2 className="relative z-10 text-[clamp(32px,5vw,52px)] font-black uppercase leading-[1.05] tracking-tight text-center mb-4">
         <span className="text-white">Every question. </span>
-        <span className="text-[#F97316]">Answered.</span>
+        <span style={{ color: '#FF7A00', textShadow: '0 0 40px rgba(255,122,0,0.25)' }}>Answered.</span>
       </h2>
 
-      <p className="relative z-10 text-[15px] text-[#666] text-center max-w-[440px] leading-relaxed mb-10">
+      <p className="relative z-10 text-[15px] text-center max-w-[440px] leading-relaxed mb-10" style={{ color: '#555555' }}>
         Everything you need to know before entering the arena. No fluff, no runaround.
       </p>
 
-      {/* Tabs */}
+      {/* Tabs — glass pills */}
       <div className="relative z-10 flex gap-2 flex-wrap justify-center mb-10">
-        {tabs.map((tab) => (
+        {tabs.map(tab => (
           <button
             key={tab.value}
             onClick={() => { setActiveTab(tab.value); setOpenIndex(null) }}
-            className={`px-[18px] py-1.5 rounded-full text-[12px] font-semibold border transition-all tracking-wide ${
-              activeTab === tab.value
-                ? 'bg-[rgba(249,115,22,0.1)] border-[rgba(249,115,22,0.3)] text-[#F97316]'
-                : 'bg-[#111] border-[#1E1E1E] text-[#666] hover:border-[#555] hover:text-[#CCC]'
-            }`}
+            className="relative overflow-hidden px-[18px] py-1.5 rounded-full text-[12px] font-semibold tracking-wide transition-all"
+            style={{
+              background: activeTab === tab.value ? 'rgba(255,122,0,0.10)' : 'rgba(255,255,255,0.03)',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+              border: activeTab === tab.value ? '1px solid rgba(255,122,0,0.32)' : '1px solid rgba(255,255,255,0.08)',
+              color: activeTab === tab.value ? '#FF7A00' : '#666666',
+              boxShadow: activeTab === tab.value ? 'inset 0 1px 0 rgba(255,122,0,0.15), 0 0 12px rgba(255,122,0,0.08)' : 'inset 0 1px 0 rgba(255,255,255,0.06)',
+            }}
           >
+            <span style={{ position: 'absolute', top: 0, left: '15%', right: '15%', height: '1px', background: activeTab === tab.value ? 'linear-gradient(90deg, transparent, rgba(255,122,0,0.30), transparent)' : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.10), transparent)', pointerEvents: 'none' }} />
             {tab.label}
           </button>
         ))}
       </div>
 
-      {/* FAQ list */}
-      <div className="relative z-10 w-full max-w-[720px] border border-[#1E1E1E] rounded-2xl overflow-hidden bg-[#111]">
-        {filtered.map((faq, i) => (
-          <div key={faq.q} className="border-b border-[#1A1A1A] last:border-b-0">
+      {/* FAQ accordion — glass container */}
+      <div
+        className="relative z-10 w-full max-w-[720px] overflow-hidden rounded-2xl"
+        style={{
+          background: 'rgba(255,255,255,0.03)',
+          backdropFilter: 'blur(24px) saturate(1.6) brightness(1.04)',
+          WebkitBackdropFilter: 'blur(24px) saturate(1.6) brightness(1.04)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08), 0 16px 48px rgba(0,0,0,0.40)',
+        }}
+      >
+        {/* Specular rim */}
+        <div style={{ position: 'absolute', top: 0, left: '10%', right: '10%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)', pointerEvents: 'none', zIndex: 10 }} />
 
-            {/* Trigger */}
+        {filtered.map((faq, i) => (
+          <div key={faq.q} style={{ borderBottom: i < filtered.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
             <button
               onClick={() => toggle(i)}
-              className={`w-full flex items-center justify-between gap-4 px-8 py-6 text-left transition-colors ${
-                openIndex === i ? 'bg-[rgba(249,115,22,0.04)]' : 'hover:bg-[rgba(249,115,22,0.04)]'
-              }`}
+              className="w-full flex items-center justify-between gap-4 px-8 py-6 text-left transition-colors"
+              style={{ background: openIndex === i ? 'rgba(255,122,0,0.04)' : 'transparent' }}
             >
-              <span className={`text-[14px] font-bold leading-snug transition-colors ${
-                openIndex === i ? 'text-[#F97316]' : 'text-white'
-              }`}>
+              <span className="text-[14px] font-bold leading-snug transition-colors" style={{ color: openIndex === i ? '#FF7A00' : '#FFFFFF' }}>
                 {faq.q}
               </span>
-              <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-[18px] font-light transition-all duration-300 ${
-                openIndex === i
-                  ? 'bg-[rgba(249,115,22,0.1)] border border-[rgba(249,115,22,0.3)] text-[#F97316] rotate-45'
-                  : 'bg-[#1A1A1A] border border-[#2A2A2A] text-[#666]'
-              }`}>
+              <div
+                className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-[18px] font-light transition-all duration-300 relative overflow-hidden"
+                style={{
+                  background: openIndex === i ? 'rgba(255,122,0,0.10)' : 'rgba(255,255,255,0.04)',
+                  backdropFilter: 'blur(8px)',
+                  WebkitBackdropFilter: 'blur(8px)',
+                  border: openIndex === i ? '1px solid rgba(255,122,0,0.30)' : '1px solid rgba(255,255,255,0.10)',
+                  color: openIndex === i ? '#FF7A00' : '#555555',
+                  transform: openIndex === i ? 'rotate(45deg)' : 'rotate(0deg)',
+                }}
+              >
                 +
               </div>
             </button>
 
-            {/* Body */}
             <AnimatePresence initial={false}>
               {openIndex === i && (
                 <motion.div
@@ -150,10 +159,8 @@ export default function FAQ() {
                   transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
                   className="overflow-hidden"
                 >
-                  <div className="px-8 pb-6 border-t border-[#1A1A1A]">
-                    <p className="text-[13px] text-[#888] leading-[1.8] pt-5">
-                      {faq.a}
-                    </p>
+                  <div className="px-8 pb-6" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+                    <p className="text-[13px] leading-[1.8] pt-5" style={{ color: '#888888' }}>{faq.a}</p>
                   </div>
                 </motion.div>
               )}
@@ -162,23 +169,30 @@ export default function FAQ() {
         ))}
       </div>
 
-      {/* Still have questions */}
+      {/* Contact CTA */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="relative z-10 w-full max-w-[720px] mt-3.5 bg-[rgba(249,115,22,0.04)] border border-[rgba(249,115,22,0.15)] rounded-2xl px-8 py-6 flex items-center justify-between gap-6 flex-wrap"
+        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }} transition={{ duration: 0.5 }}
+        className="relative z-10 w-full max-w-[720px] mt-3.5 overflow-hidden rounded-2xl px-8 py-6 flex items-center justify-between gap-6 flex-wrap"
+        style={{
+          background: 'rgba(255,122,0,0.05)',
+          backdropFilter: 'blur(24px) saturate(1.8) brightness(1.05)',
+          WebkitBackdropFilter: 'blur(24px) saturate(1.8) brightness(1.05)',
+          border: '1px solid rgba(255,122,0,0.18)',
+          boxShadow: 'inset 0 1px 0 rgba(255,122,0,0.12)',
+        }}
       >
+        <div style={{ position: 'absolute', top: 0, left: '12%', right: '12%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(255,122,0,0.28), transparent)', pointerEvents: 'none' }} />
         <div>
-          <p className="text-[14px] font-extrabold text-white uppercase tracking-wide mb-1">
-            Still have a question?
-          </p>
-          <p className="text-[12px] text-[#666]">
-            Our support team is available 24/7 to help you out.
-          </p>
+          <p className="text-[14px] font-extrabold text-white uppercase tracking-wide mb-1">Still have a question?</p>
+          <p className="text-[12px]" style={{ color: '#555555' }}>Our support team is available 24/7 to help you out.</p>
         </div>
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=playdecepta@gmail.com" className="px-6 py-2.5 bg-[#F97316] hover:opacity-90 text-black text-[12px] font-bold uppercase tracking-wide rounded-lg transition-opacity whitespace-nowrap">
+        <a
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=playdecepta@gmail.com"
+          className="relative overflow-hidden px-6 py-2.5 rounded-xl text-[12px] font-bold uppercase tracking-wide whitespace-nowrap transition-all hover:-translate-y-px"
+          style={{ background: 'rgba(255,122,0,0.92)', color: '#090909', boxShadow: '0 0 20px rgba(255,122,0,0.25), inset 0 1px 0 rgba(255,255,255,0.28)' }}
+        >
+          <span style={{ position: 'absolute', top: 0, left: '10%', right: '10%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.40), transparent)' }} />
           Contact support
         </a>
       </motion.div>

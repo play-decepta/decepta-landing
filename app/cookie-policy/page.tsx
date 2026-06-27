@@ -1,58 +1,96 @@
 import Navbar from '@/components/sections/02-Navbar'
 import Footer from '@/components/sections/18-Footer'
 
+const glassCard: React.CSSProperties = {
+  background: 'rgba(255,255,255,0.02)',
+  backdropFilter: 'blur(12px)',
+  WebkitBackdropFilter: 'blur(12px)',
+  border: '1px solid rgba(255,255,255,0.06)',
+  borderRadius: '14px',
+  padding: '20px 22px',
+  position: 'relative',
+  overflow: 'hidden',
+}
+
+const rim: React.CSSProperties = {
+  position: 'absolute',
+  top: 0, left: '12%', right: '12%', height: '1px',
+  background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.10), transparent)',
+  pointerEvents: 'none', borderRadius: '999px',
+}
+
+const sections = [
+  {
+    num: '1', title: 'Current use of cookies',
+    content: 'Decepta does not currently use tracking, advertising, or analytics cookies on this website. We do not collect browsing behavior, do not run advertising pixels, and do not share visitor data with third parties for marketing purposes.',
+  },
+  {
+    num: '2', title: 'Essential technical data',
+    content: 'Like most websites, your browser may store small amounts of technical data required for the site to function correctly (for example, remembering your screen size for display purposes). This data is not used to identify or track you personally and is not shared with anyone.',
+  },
+  {
+    num: '3', title: 'If this changes',
+    content: 'If Decepta introduces analytics, performance monitoring, or advertising cookies in the future, this page will be updated before those changes take effect, and where required, we will request your consent before any such cookies are set.',
+  },
+]
+
 export default function CookiePolicyPage() {
   return (
-    <main className="bg-[#0A0A0A] min-h-screen text-white">
-      <Navbar />
+    <main className="relative min-h-screen overflow-x-hidden" style={{ backgroundColor: '#090909', color: '#FFFFFF' }}>
 
+      {/* Ambient orbs */}
+      <div className="orb orb-orange" style={{ width: '500px', height: '500px', top: '-100px', left: '-100px', opacity: 0.4 }} />
+      <div className="orb orb-dim" style={{ width: '500px', height: '500px', bottom: '10vh', right: '-150px' }} />
 
-      <section className="w-full px-5 py-20 flex flex-col items-center">
-        <div className="w-full max-w-[720px]">
+      <div className="relative z-10">
+        <Navbar />
 
-          <p className="text-[11px] font-bold tracking-[0.18em] uppercase text-[#F97316] mb-4">Legal</p>
-          <h1 className="text-[clamp(28px,5vw,42px)] font-black uppercase leading-[1.1] tracking-tight text-white mb-3">
-            Cookie Policy
-          </h1>
-          <p className="text-[12px] text-[#555] mb-12">Last updated: 21st June 2026</p>
+        <section className="w-full px-5 py-24 flex flex-col items-center">
+          <div className="w-full max-w-[720px]">
 
-          <div className="flex flex-col gap-8 text-[14px] text-[#999] leading-[1.8]">
+            {/* Header */}
+            <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#FF7A00', marginBottom: '16px' }}>Legal</p>
+            <h1 style={{ fontSize: 'clamp(28px, 5vw, 42px)', fontWeight: 900, textTransform: 'uppercase', lineHeight: 1.1, letterSpacing: '-0.02em', color: '#FFFFFF', marginBottom: '12px' }}>
+              Cookie Policy
+            </h1>
+            <p style={{ fontSize: '12px', color: '#444444', marginBottom: '56px' }}>Last updated: 21st June 2026</p>
 
-            <div>
-              <h2 className="text-[15px] font-bold text-white uppercase tracking-wide mb-3">1. Current use of cookies</h2>
-              <p>
-                Decepta does not currently use tracking, advertising, or analytics cookies on this website. We do not collect browsing behavior, do not run advertising pixels, and do not share visitor data with third parties for marketing purposes.
-              </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', fontSize: '14px', color: '#888888', lineHeight: 1.8 }}>
+
+              {sections.map(s => (
+                <div key={s.num} style={glassCard}>
+                  <div style={rim} />
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
+                    <span style={{ fontSize: '11px', fontWeight: 800, color: '#FF7A00', letterSpacing: '0.06em', marginTop: '3px', flexShrink: 0, minWidth: '18px' }}>{s.num}.</span>
+                    <div>
+                      <h2 style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '10px' }}>{s.title}</h2>
+                      <p>{s.content}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              {/* Section 4 — Contact (orange tint) */}
+              <div style={{ ...glassCard, background: 'rgba(255,122,0,0.04)', border: '1px solid rgba(255,122,0,0.15)' }}>
+                <div style={{ ...rim, background: 'linear-gradient(90deg, transparent, rgba(255,122,0,0.25), transparent)' }} />
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
+                  <span style={{ fontSize: '11px', fontWeight: 800, color: '#FF7A00', letterSpacing: '0.06em', marginTop: '3px', flexShrink: 0 }}>4.</span>
+                  <div>
+                    <h2 style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '10px' }}>Contact</h2>
+                    <p>
+                      Questions about this Cookie Policy can be directed to{' '}
+                      <a href="mailto:playdecepta@gmail.com" style={{ color: '#FF7A00', textDecoration: 'none', fontWeight: 700 }}>playdecepta@gmail.com</a>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
             </div>
-
-            <div>
-              <h2 className="text-[15px] font-bold text-white uppercase tracking-wide mb-3">2. Essential technical data</h2>
-              <p>
-                Like most websites, your browser may store small amounts of technical data required for the site to function correctly (for example, remembering your screen size for display purposes). This data is not used to identify or track you personally and is not shared with anyone.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-[15px] font-bold text-white uppercase tracking-wide mb-3">3. If this changes</h2>
-              <p>
-                If Decepta introduces analytics, performance monitoring, or advertising cookies in the future, this page will be updated before those changes take effect, and where required, we will request your consent before any such cookies are set.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-[15px] font-bold text-white uppercase tracking-wide mb-3">4. Contact</h2>
-              <p>
-                Questions about this Cookie Policy can be directed to{' '}
-                <a href="mailto:playdecepta@gmail.com" className="text-[#F97316] hover:underline">playdecepta@gmail.com</a>.
-              </p>
-            </div>
-
           </div>
+        </section>
 
-        </div>
-      </section>
-
-      <Footer />
+        <Footer />
+      </div>
     </main>
   )
 }
