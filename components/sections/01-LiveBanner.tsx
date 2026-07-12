@@ -104,7 +104,7 @@ export default function LiveBanner() {
         <span style={{ opacity: 0.35, fontSize: '11px', fontWeight: 700, color: '#F5C451' }}>·</span>
 
         <p style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.08em', color: '#F5C451', textTransform: 'uppercase', opacity: 0.6, margin: 0 }}>
-          Preview — full launch June 28
+          Coming Soon
         </p>
 
         <button
