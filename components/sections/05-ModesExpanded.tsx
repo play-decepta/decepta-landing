@@ -13,7 +13,7 @@ const modes = [
     title: 'Player vs Player',
     desc: 'The core Decepta experience. Go head-to-head against a real opponent in a timed intelligence battle. Every round counts.',
     details: [
-      'Match using shared codes, only enter if you dare',
+      'Match using shared links, only enter if you dare',
       'Both players stake equal amounts before the match starts',
       'Solve riddles under a countdown, roles switch each round',
       'Winner takes the full pot instantly',
